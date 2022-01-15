@@ -10,7 +10,7 @@ The project's goal is to provide a one-stop financial platform for controlling y
 
 ## Technologies Used
 * Golang
-* ANgular 13
+* Angular 13
 
 ## Team Members
 * Tushar Ranjan
