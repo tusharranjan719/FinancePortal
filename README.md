@@ -8,6 +8,10 @@ The project's goal is to provide a one-stop financial platform for controlling y
 * **Shared expenses** - Lets you keep a track of shared expenses and split accordingly among your friends.
 * **Expenditure summary** - It gives you a brief idea about your overall expenses by classifying them into different categories like groceries, rent, bills and so on.
 
+## Technologies Used
+* Golang
+* ANgular 13
+
 ## Team Members
 * Tushar Ranjan
 * Mehul Jhaver
