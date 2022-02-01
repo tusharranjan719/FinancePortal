@@ -1,0 +1,40 @@
+
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .header-image {
+    background-image: url('../../src/assets/Images/Fl.jpg');
+    background-size: cover;
+  }
+  .center-content {
+    text-align: -webkit-center;
+  }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .mat-button{
+    margin: 10px;
+    width: 100px;
+    color: white;
+    height: 40px;
+    background-color: #3F51B5;
+    
+  }
+
+// .header-image {
+// max-width: 400px;
+// }
+
+// .header-image {
+// background-image: url('src/assets/Images/Login.png');
+// background-size: cover;
+// }
