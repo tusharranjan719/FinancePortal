@@ -9,6 +9,11 @@
     background-size: cover;
   }
   .center-content {
+    /* position the div in center */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: -webkit-center;
   }
   .example-form {
