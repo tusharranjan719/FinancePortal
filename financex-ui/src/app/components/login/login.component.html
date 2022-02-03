@@ -1,53 +1,47 @@
 <div class="center-content">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="header-image"></div>
-        <mat-card-title class="card-title">Login/Sign-Up</mat-card-title>
-      </mat-card-header>
-      
-      <mat-card-content>
-        <mat-tab-group>
-          <mat-tab label="Login">
-            <form [formGroup]="loginForm" (submit)="submit()">
-                <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput value="" >
-                <mat-icon matSuffix>email</mat-icon>
-                </mat-form-field>
-    
-                <mat-form-field class="example-full-width">
-                <mat-label>Password</mat-label>
-                <input type="password" matInput >
-                <mat-icon matSuffix>vpn_key</mat-icon>
-                </mat-form-field>
-                <button mat-button color="primary">Login</button>
-            </form>
-          </mat-tab>
-  
-          <mat-tab label="Sign-Up" [formGroup]="">
-            <form [formGroup]="signupForm" (submit)="submit()">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput value="" >
-                    <mat-icon matSuffix>email</mat-icon>
-                </mat-form-field>
-    
-                <mat-form-field class="example-full-width">
-                    <mat-label>Password</mat-label>
-                    <input type="password" matInput >
-                    <mat-icon matSuffix>vpn_key</mat-icon>
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Retype Password</mat-label>
-                    <input type="password" matInput >
-                    <mat-icon matSuffix>vpn_key</mat-icon>
-                </mat-form-field>
-                <button mat-button color="primary" >Sign-Up</button>
-            </form>
-          </mat-tab>
-        </mat-tab-group>
-  
-      </mat-card-content>
-  
-    </mat-card>
-  </div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title class="card-title">Login/Sign-Up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Login">
+          <form [formGroup]="loginForm" (submit)="submit()">
+              <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput value="" >
+              <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput >
+              <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+              <button mat-button color="primary">Login</button>
+          </form>
+        </mat-tab>
+        <mat-tab label="Sign-Up">
+          <form [formGroup]="signupForm" (submit)="submit()">
+              <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput value="" >
+                  <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                  <mat-label>Password</mat-label>
+                  <input type="password" matInput >
+                  <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                  <mat-label>Retype Password</mat-label>
+                  <input type="password" matInput >
+                  <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+              <button mat-button color="primary" >Sign-Up</button>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
