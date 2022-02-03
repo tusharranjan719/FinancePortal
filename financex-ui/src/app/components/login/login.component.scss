@@ -32,6 +32,17 @@
 .mat-card-header .mat-card-title.card-title {
     margin-top: 10px;
 }
+
+.mat-button.mat-primary.mat-button-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: all !important;
+  color: beige;
+}
+
+.invalid_creds {
+  color: red;
+}
 // .header-image {
 // max-width: 400px;
 // }

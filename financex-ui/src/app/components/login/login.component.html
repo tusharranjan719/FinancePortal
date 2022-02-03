@@ -1,47 +1,67 @@
-<div class="center-content">
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="header-image"></div>
-      <mat-card-title class="card-title">Login/Sign-Up</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-tab-group>
-        <mat-tab label="Login">
-          <form [formGroup]="loginForm" (submit)="submit()">
-              <mat-form-field class="example-full-width">
-              <mat-label>Email</mat-label>
-              <input type="email" matInput value="" >
-              <mat-icon matSuffix>email</mat-icon>
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-              <mat-label>Password</mat-label>
-              <input type="password" matInput >
-              <mat-icon matSuffix>vpn_key</mat-icon>
-              </mat-form-field>
-              <button mat-button color="primary">Login</button>
-          </form>
-        </mat-tab>
-        <mat-tab label="Sign-Up">
-          <form [formGroup]="signupForm" (submit)="submit()">
-              <mat-form-field class="example-full-width">
+<div class="fin-login-page">
+  <div class="center-content">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title class="card-title">Login/SignUp</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Login">
+            <form [formGroup]="loginForm" (submit)="loginSubmit()">
+                <mat-form-field class="example-full-width">
                   <mat-label>Email</mat-label>
-                  <input type="email" matInput value="" >
-                  <mat-icon matSuffix>email</mat-icon>
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
+                  <input type="email" formControlName="email" matInput>
+                  <mat-error *ngIf="loginFormControls['email'].touched && loginFormControls['email'].invalid">
+                    <span *ngIf="loginFormHasError('email', 'required')">This field is mandatory.</span>
+                    <span *ngIf="loginFormHasError('email', 'pattern')">The Email is invalid.</span>
+                  </mat-error>
+                <!-- <mat-icon matSuffix>email</mat-icon> -->
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
                   <mat-label>Password</mat-label>
-                  <input type="password" matInput >
-                  <mat-icon matSuffix>vpn_key</mat-icon>
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                  <mat-label>Retype Password</mat-label>
-                  <input type="password" matInput >
-                  <mat-icon matSuffix>vpn_key</mat-icon>
-              </mat-form-field>
-              <button mat-button color="primary" >Sign-Up</button>
-          </form>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
-  </mat-card>
+                  <input type="password" formControlName="password" matInput >
+                  <mat-error *ngIf="loginFormControls['password'].touched && loginFormControls['password'].invalid">
+                    <span *ngIf="loginFormHasError('password', 'required')">This field is mandatory.</span>
+                  </mat-error>
+                <!-- <mat-icon matSuffix>vpn_key</mat-icon> -->
+                </mat-form-field>
+                <div class="invalid_creds" *ngIf="invalidLoginCreds">{{invalidLoginMsg}}</div>
+                <button mat-button color="primary" [disabled]="loginForm.invalid">Login</button>
+            </form>
+          </mat-tab>
+          <mat-tab label="SignUp">
+            <form [formGroup]="signupForm" (submit)="signUpSubmit()">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" formControlName="email" matInput>
+                    <mat-error *ngIf="signUpFormControls['email'].touched && signUpFormControls['email'].invalid">
+                      <span *ngIf="signUpFormHasError('email', 'required')">This field is mandatory.</span>
+                      <span *ngIf="signUpFormHasError('email', 'pattern')">The Email is invalid.</span>
+                    </mat-error>
+                    <!-- <mat-icon matSuffix>email</mat-icon> -->
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" formControlName="password" matInput >
+                    <mat-error *ngIf="signUpFormControls['password'].touched && signUpFormControls['password'].invalid">
+                      <span *ngIf="signUpFormHasError('password', 'required')">This field is mandatory.</span>
+                    </mat-error>
+                    <!-- <mat-icon matSuffix>vpn_key</mat-icon> -->
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Retype Password</mat-label>
+                    <input type="password" formControlName="retype_password" matInput >
+                    <mat-error *ngIf="signUpFormControls['retype_password'].touched && signUpFormControls['retype_password'].invalid">
+                      <span *ngIf="signUpFormHasError('retype_password', 'required')">This field is mandatory.</span>
+                    </mat-error>
+                    <!-- <mat-icon matSuffix>vpn_key</mat-icon> -->
+                </mat-form-field>
+                <button mat-button color="primary" [disabled]="signupForm.invalid">SignUp</button>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

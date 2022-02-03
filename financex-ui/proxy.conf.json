@@ -1,0 +1,14 @@
+{
+    "/signUp/*": {
+        "target": "http://localhost:5000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/signIn/*": {
+        "target": "http://localhost:5000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    }
+}
