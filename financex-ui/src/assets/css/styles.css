@@ -15,6 +15,10 @@ body {
   line-height: 26px;
   padding: 0;
 }
+.login_bg{
+  background-image: url('../images/LoginBG.jpg');
+  background-size: cover;
+}
 h1,
 h2,
 h3,
