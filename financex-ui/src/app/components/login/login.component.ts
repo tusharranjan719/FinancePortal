@@ -25,8 +25,18 @@ export class LoginComponent implements OnInit {
   signupForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
     password: ['', Validators.required],
-    retype_password: ['', Validators.required]
+    retype_password: ['', [Validators.required, this.passwordMatcher.bind(this)]]
   });
+
+  private passwordMatcher(control: FormControl): { [s: string]: boolean } | null {
+    if (
+        this.signupForm &&
+        (control.value !== this.signupForm.controls['password'].value)
+    ) {
+        return { passwordNotMatch: true };
+    }
+    return null;
+  } 
 
   loginSubmit(){
     let formValue = this.loginForm.value;
