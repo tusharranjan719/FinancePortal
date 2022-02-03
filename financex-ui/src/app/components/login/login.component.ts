@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'financex-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   invalidLoginCreds: boolean = false;
   invalidLoginMsg: string = '';
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,9 +38,15 @@ export class LoginComponent implements OnInit {
       console.log(data);
     },
     (error)=>{
-      this.invalidLoginCreds = true;
-      this.invalidLoginMsg = error.error;
-      console.log(error);
+      if(error.status == 401){
+        this.invalidLoginCreds = true;
+        this.invalidLoginMsg = error.error;
+        console.log(error);
+      }
+      else{
+        this.router.navigate(['dashboard']);
+      }
+      
     });
   }
   signUpSubmit(){
