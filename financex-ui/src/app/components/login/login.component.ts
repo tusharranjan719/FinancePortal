@@ -11,9 +11,10 @@ export class LoginComponent implements OnInit {
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   invalidLoginCreds: boolean = false;
   invalidLoginMsg: string = '';
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { 
+    let bodyElem: HTMLElement | null = document.getElementById('financeX');
+    bodyElem!['className'] += 'login_bg';
 
-  ngOnInit(): void {
   }
 
   loginForm = this.fb.group({
@@ -24,8 +25,18 @@ export class LoginComponent implements OnInit {
   signupForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
     password: ['', Validators.required],
-    retype_password: ['', Validators.required]
+    retype_password: ['', [Validators.required, this.passwordMatcher.bind(this)]]
   });
+
+  private passwordMatcher(control: FormControl): { [s: string]: boolean } | null {
+    if (
+        this.signupForm &&
+        (control.value !== this.signupForm.controls['password'].value)
+    ) {
+        return { passwordNotMatch: true };
+    }
+    return null;
+  } 
 
   loginSubmit(){
     let formValue = this.loginForm.value;
@@ -81,5 +92,13 @@ export class LoginComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(){
+    let bodyElem: HTMLElement | null = document.getElementById('financeX');
+    bodyElem!['classList'].remove('login_bg');
   }
 }

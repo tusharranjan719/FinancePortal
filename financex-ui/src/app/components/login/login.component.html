@@ -54,6 +54,7 @@
                     <input type="password" formControlName="retype_password" matInput >
                     <mat-error *ngIf="signUpFormControls['retype_password'].touched && signUpFormControls['retype_password'].invalid">
                       <span *ngIf="signUpFormHasError('retype_password', 'required')">This field is mandatory.</span>
+                      <span *ngIf="signUpFormHasError('retype_password', 'passwordNotMatch')">Password doesnot match.</span>
                     </mat-error>
                     <!-- <mat-icon matSuffix>vpn_key</mat-icon> -->
                 </mat-form-field>
