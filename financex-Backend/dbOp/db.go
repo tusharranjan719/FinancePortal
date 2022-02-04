@@ -52,7 +52,7 @@ func dsn(dbName string) string {
 func DBConn(db *sql.DB) {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFunc()
-	res, err := db.ExecContext(ctx, "IF no DB: Create DB "+dbname)
+	res, err := db.ExecContext(ctx, "CREATE DATABASE IF NOT EXISTS "+dbname)
 	if err != nil {
 		log.Printf("Error: % s while creating Database\n", err)
 		return
