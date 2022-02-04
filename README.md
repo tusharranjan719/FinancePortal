@@ -11,6 +11,11 @@ The project's goal is to provide a one-stop financial platform for controlling y
 ## Technologies Used
 * Golang
 * Angular 13
+* SQlite
+* HTML
+* CSS
+* JavaScript
+* TypeScript
 
 ## Team Members
 * Tushar Ranjan
