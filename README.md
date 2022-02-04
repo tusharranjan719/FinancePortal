@@ -1,4 +1,4 @@
-# FinancePortal
+# FinanceX
 The project's goal is to provide a one-stop financial platform for controlling your costs. This portal allows you to link your bank account and conduct transactions with other accounts in order to settle your balances. The portal also has tools to help you manage your spending by offering a concise summary of your monthly costs and classifying them. This is a course project for CEN5035 - Software Engineering.
 
 ## Brief Description
@@ -22,5 +22,22 @@ The project's goal is to provide a one-stop financial platform for controlling y
 * Mehul Jhaver
 * Sankalp Pandey
 * Ayush Awasthi
+
+## Sprint 1: Tasks Completed
+**Landing Page** 
+  * It is the homepage of FinanceX which consists of various tabs on navigation bar such as Home, About, Features, Team and Login.
+  * The FinanceX logo appears in the Home section.
+  * The About section tells you everything you need to know about FinanceX.
+  * The Feature section contains information about all of the application's features and services.
+  * Information reagrding the members of the team can be found in the Team section.
+  * We can find the testimonial section, which includes reviews from other users, by scrolling down.
+  * The login tab on the navigation bar allows users to access their respective dashboards.
+ 
+ **Secured sign up and login**
+  * **Sign up**
+    * The sign up section helps new users to create an account using their email address.
+    * It also checks for a valid email address while creating a new account.
+  * **Login**
+    * The login section helps already existing users to login in and get access to their respective dashboards.
 
 
