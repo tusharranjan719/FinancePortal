@@ -23,6 +23,15 @@ The project's goal is to provide a one-stop financial platform for controlling y
 * Sankalp Pandey
 * Ayush Awasthi
 
+## How to run
+**Client**
+* Navigate to folder ../FinancePortal/financex-ui
+* Enter "npm run start"
+
+**Server**
+* Navigate to folder ../FinancePortal/financex-Backend/operate
+* Enter "go run operate.go"
+
 ## Sprint 1: Tasks Completed
 **Landing Page** 
   * It is the homepage of FinanceX which consists of various tabs on navigation bar such as Home, About, Features, Team and Login.
