@@ -1,4 +1,5 @@
-![Our Logo](https://imgur.com/a/MjnbQu4)
+<img align="right" src="https://user-images.githubusercontent.com/68017211/152626463-dad19147-475b-464e-8718-d4a5137958ca.png">
+<br clear="left"/>
 
 # FinanceX
 The project's goal is to provide a one-stop financial platform for controlling your costs. This portal allows you to link your bank account and conduct transactions with other accounts in order to settle your balances. The portal also has tools to help you manage your spending by offering a concise summary of your monthly costs and classifying them. This is a course project for CEN5035 - Software Engineering.
@@ -33,6 +34,10 @@ The project's goal is to provide a one-stop financial platform for controlling y
 **Server**
 * Navigate to folder ../FinancePortal/financex-Backend/operate
 * Enter "go run operate.go"
+
+## Sprint 1: Videos
+* Frontend : https://youtu.be/f3Grv9Wpkk4
+* Backend : https://youtu.be/dPFdobWmGa4
 
 ## Sprint 1: Tasks Completed
 **Landing Page** 
