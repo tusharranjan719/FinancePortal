@@ -26,6 +26,12 @@ The project's goal is to provide a one-stop financial platform for controlling y
 * Sankalp Pandey
 * Ayush Awasthi
 
+## GitHub Username Mapping
+* HappyDash -> Sankalp Pandey
+* tusharranjan719 -> Tushar Ranjan
+* mehuljhaver4 -> Mehul Jhaver
+* Awasthi-Ayush-7 -> Ayush Awasthi
+
 ## How to run
 **Client**
 * Navigate to folder ../FinancePortal/financex-ui
