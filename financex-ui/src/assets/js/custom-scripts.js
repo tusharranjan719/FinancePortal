@@ -110,9 +110,9 @@ jQuery(function($) {
     });
 
  
-    $("a[rel^='prettyPhoto']").prettyPhoto({
-        social_tools: false
-    });
+    // $("a[rel^='prettyPhoto']").prettyPhoto({
+    //     social_tools: false
+    // });
  
 
 });
