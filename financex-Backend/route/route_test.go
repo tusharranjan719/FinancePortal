@@ -7,9 +7,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/dgrijalva/jwt-go"
 	dbop "kivancaydogmus.com/apps/userApp/dbOp"
 )
 
+// Test - 1
 func Test_getUsers(t *testing.T) {
 	req, err := http.NewRequest("GET", "/users", nil)
 	if err != nil {
@@ -29,6 +31,7 @@ func Test_getUsers(t *testing.T) {
 	}
 }
 
+// Test - 2
 func Test_addUser(t *testing.T) {
 	samplePerson := dbop.Person{Id: 1, UserName: "username", Password: "password"}
 	bytePerson, _ := json.Marshal(samplePerson)
@@ -48,4 +51,46 @@ func Test_addUser(t *testing.T) {
 
 	req.Header.Set("Token", samplePerson.Token)
 
+}
+
+// Test - 3
+func Test_login(t *testing.T) {
+	samplePerson := dbop.Person{Id: 1, UserName: "username", Password: "password"}
+	bytePerson, _ := json.Marshal(samplePerson)
+	req, err := http.NewRequest("POST", "/signIn", bytes.NewReader(bytePerson))
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(login)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code : got %v want %v\n", status, http.StatusOK)
+	}
+	req.Header.Set("Token", samplePerson.Token)
+}
+
+// Test - 4
+func Test_deleteMe(t *testing.T) {
+	req, err := http.NewRequest("DELETE", "/user/me", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if myMap, ok := r.Context().Value("props").(jwt.MapClaims); !ok {
+			t.Errorf("props not in request %q", myMap)
+		} else {
+			username := myMap["user_name"]
+			if v, e := username.(string); !e {
+				t.Errorf("this map does not have user_name %q", v)
+			} else {
+				if id := dbop.DeleteMe(v); id == 0 {
+					t.Errorf("an error occured during the delete the user %q", v)
+				}
+			}
+		}
+	})
+	handler := middleware.MiddleWare(testHandler)
+	handler.ServeHTTP(rr, req)
 }
