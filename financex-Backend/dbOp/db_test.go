@@ -1,6 +1,7 @@
 package dbop
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -47,4 +48,38 @@ func TestLogOutFromAllSession(t *testing.T) {
 	defer db.Close()
 	_, err := Session_Expired("sample user name")
 	assert.NoError(t, err)
+}
+
+func TestUpdateUser(t *testing.T) {
+	p := Person{Id: 52, UserName: "updated name", Password: "updated pswrd", Token: ""}
+	reqBody, err := json.Marshal(p)
+	assert.NoError(t, err)
+
+	_, err = User_Edited(reqBody, "sample user name")
+	assert.NoError(t, err)
+}
+
+func TestGetMe(t *testing.T) {
+	expected := Person{51, "person1", "I'll do it myself", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MjkyNDM0ODQsInVzZXJfaWQiOjUxLCJ1c2VyX25hbWUiOiJwZXJzb24xIn0.YyKwqSRLtAXcDWEsxA0eWN-y5k3MiDfjiKkbrWWA1D4"}
+	actual := Self_ID(expected.UserName)
+	assert.Equal(t, expected, actual)
+}
+
+func TestGetLastLoginToken(t *testing.T) {
+	type testcase struct {
+		username      string
+		expectedToken string
+		actualToken   string
+	}
+	users := []testcase{
+		{"sample user name", "", ""},
+		{"person1", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MjkyNDM0ODQsInVzZXJfaWQiOjUxLCJ1c2VyX25hbWUiOiJwZXJzb24xIn0.YyKwqSRLtAXcDWEsxA0eWN-y5k3MiDfjiKkbrWWA1D4", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MjkyNDM0ODQsInVzZXJfaWQiOjUxLCJ1c2VyX25hbWUiOiJwZXJzb24xIn0.YyKwqSRLtAXcDWEsxA0eWN-y5k3MiDfjiKkbrWWA1D4"},
+	}
+	for _, user := range users {
+		if user.actualToken == GetLastLoginToken(user.username) && user.expectedToken == user.actualToken {
+
+		} else {
+			t.Error("unappropriate token for user")
+		}
+	}
 }
