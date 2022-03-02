@@ -26,3 +26,25 @@ func Test_getPersonToLogin(t *testing.T) {
 	actualPerson := User_Login(expectedPerson.UserName, expectedPerson.Password)
 	assert.Equal(t, expectedPerson, actualPerson)
 }
+
+func Test_deleteUserById(t *testing.T) {
+	db := prepareDb(dbname)
+	defer db.Close()
+	_, err := DeleteBy_ID(db, 52)
+	assert.NoError(t, err)
+}
+
+func Test_deleteAllTokens(t *testing.T) {
+	db := prepareDb(dbname)
+	defer db.Close()
+	p := Person{Id: 50, UserName: "sample user name", Password: "sample password", Token: ""}
+	_, err := Tokens_Deleted(&p)
+	assert.NoError(t, err)
+}
+
+func TestLogOutFromAllSession(t *testing.T) {
+	db := prepareDb(dbname)
+	defer db.Close()
+	_, err := Session_Expired("sample user name")
+	assert.NoError(t, err)
+}
