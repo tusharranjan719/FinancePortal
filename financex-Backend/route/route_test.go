@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -143,4 +144,28 @@ func Test_getMe(t *testing.T) {
 			status, http.StatusOK)
 	}
 	assert.Equal(t, expected, rr.Body.String())
+}
+
+// Test - 7
+func Test_logout(t *testing.T) {
+	samplePerson := dbop.Person{Id: 1, UserName: "username", Password: "password", Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MjkzMzA1MjYsInVzZXJfaWQiOjAsInVzZXJfbmFtZSI6InVzZXJuYW1lIn0.zvQPDxs4U1lIp3_UsxTCRdP5j7mH5hRGbf-adQKDGPs"}
+	req, err := http.NewRequest("GET", "/users/logout/me", nil)
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", samplePerson.Token))
+	if err != nil {
+		t.Fatal(err)
+	}
+	rr := httptest.NewRecorder()
+	handler := middleware.MiddleWare(http.HandlerFunc(logout))
+	ctx := req.Context()
+	myMap := jwt.MapClaims{"user_name": samplePerson.UserName, "user_id": samplePerson.Id, "exp": time.Now().Add(time.Minute * 15).Unix(), "Token": samplePerson.Token}
+	ctx = context.WithValue(ctx, "props", myMap)
+	req = req.WithContext(ctx)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		if status == http.StatusUnauthorized {
+			t.Log("Please authenticate first\n")
+		}
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
 }
