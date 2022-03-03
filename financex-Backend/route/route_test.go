@@ -13,6 +13,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/stretchr/testify/assert"
 	dbop "kivancaydogmus.com/apps/userApp/dbOp"
+	"kivancaydogmus.com/apps/userApp/service"
 )
 
 // Test - 1
@@ -89,13 +90,13 @@ func Test_deleteMe(t *testing.T) {
 			if v, e := username.(string); !e {
 				t.Errorf("this map does not have user_name %q", v)
 			} else {
-				if id := dbop.DeleteMe(v); id == 0 {
+				if id := dbop.User_Deleted(v); id == 0 {
 					t.Errorf("an error occured during the delete the user %q", v)
 				}
 			}
 		}
 	})
-	handler := middleware.MiddleWare(testHandler)
+	handler := service.Authentication(testHandler)
 	handler.ServeHTTP(rr, req)
 }
 
@@ -132,7 +133,7 @@ func Test_getMe(t *testing.T) {
 		t.Fatal(err)
 	}
 	rr := httptest.NewRecorder()
-	handler := middleware.MiddleWare(http.HandlerFunc(getMe))
+	handler := service.Authentication(http.HandlerFunc(getUser))
 	ctx := req.Context()
 	myMap := jwt.MapClaims{"user_name": samplePerson.UserName, "user_id": samplePerson.Id, "exp": time.Now().Add(time.Minute * 15).Unix(), "Token": samplePerson.Token}
 	ctx = context.WithValue(ctx, "props", myMap)
@@ -155,7 +156,7 @@ func Test_logout(t *testing.T) {
 		t.Fatal(err)
 	}
 	rr := httptest.NewRecorder()
-	handler := middleware.MiddleWare(http.HandlerFunc(logout))
+	handler := service.Authentication(http.HandlerFunc(logout))
 	ctx := req.Context()
 	myMap := jwt.MapClaims{"user_name": samplePerson.UserName, "user_id": samplePerson.Id, "exp": time.Now().Add(time.Minute * 15).Unix(), "Token": samplePerson.Token}
 	ctx = context.WithValue(ctx, "props", myMap)
