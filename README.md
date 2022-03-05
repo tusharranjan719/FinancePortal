@@ -63,11 +63,7 @@ The project's goal is to provide a one-stop financial platform for controlling y
     * The login section helps already existing users to login in and get access to their respective dashboards.
 
 
-## Sprint 1: Tasks Completed
-**Landing Page** 
 
- 
- **Secured sign up and login**
 
 
 
