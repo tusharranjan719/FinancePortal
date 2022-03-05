@@ -58,8 +58,32 @@ describe('It should have One Stop container text', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  it('has background-image', () => {
+  it('has One Stop center text', () => {
     cy.get('.banner-inner h2 > b').should('contain', 'One Stop')
+  });
+});
+describe('It should have Finance Solution container text', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has Finance Solution center text', () => {
+    cy.get('.banner-inner h2').should('contain', ' Finance Solution')
+  });
+});
+describe('It should have Money Management Made Easy container text', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has Sign Up button', () => {
+    cy.get('.banner-inner p').should('contain', 'Money Management Made Easy')
+  });
+});
+describe('It should have Sign Up link', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has Sign Up button', () => {
+    cy.get('.banner-inner a').should('contain', 'Sign Up')
   });
 });
 
