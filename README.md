@@ -62,4 +62,7 @@ The project's goal is to provide a one-stop financial platform for controlling y
   * **Login**
     * The login section helps already existing users to login in and get access to their respective dashboards.
 
+## Sprint 2: Api Documentation (using Swagger)
+https://app.swaggerhub.com/apis-docs/tusharranjan719/FinanceX/1.0.0
+
 
