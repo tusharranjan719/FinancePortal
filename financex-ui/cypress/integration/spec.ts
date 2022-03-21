@@ -86,6 +86,17 @@ describe('It should have Sign Up link', () => {
     cy.get('.banner-inner a').should('contain', 'Sign Up')
   });
 });
+describe('It should have about container', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has about container', () => {
+    cy.get('[id^=about]').should('be.visible');
+  });
+  it('has about image', () => {
+    cy.get('[id^=about] img.img-responsive').should('be.visible');
+  });
+});
 
 
 
