@@ -97,6 +97,14 @@ describe('It should have about container', () => {
     cy.get('[id^=about] img.img-responsive').should('be.visible');
   });
 });
+describe('It should have features container', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has features container', () => {
+    cy.get('[id^=features]').should('be.visible');
+  });
+});
 
 
 
