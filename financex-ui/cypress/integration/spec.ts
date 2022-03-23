@@ -86,6 +86,36 @@ describe('It should have Sign Up link', () => {
     cy.get('.banner-inner a').should('contain', 'Sign Up')
   });
 });
+describe('It should have about container', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has about container', () => {
+    cy.get('[id^=about]').should('be.visible');
+  });
+  it('has about image', () => {
+    cy.get('[id^=about] img.img-responsive').should('be.visible');
+  });
+});
+describe('It should have features container', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has features container', () => {
+    cy.get('[id^=features]').should('be.visible');
+  });
+});
+describe('It should show all 3 features', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has 3 features', () => {
+    cy.get('[id^=features] .features').children().should('have.length', 3);
+  });
+  it('first feature has shared expenses', () => {
+    cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
+  });
+});
 
 
 
