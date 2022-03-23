@@ -367,4 +367,137 @@
     }
 }
 
+.main-panel{
+    position: relative;
+    float: right;
+    width: $sidebar-width;
+    @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+
+     .main-content{
+        margin-top: 70px;
+        padding: 30px 15px;
+        min-height: calc(100vh - 123px);
+    }
+
+     .footer{
+        border-top: 1px solid #e7e7e7;
+    }
+
+     .navbar{
+        margin-bottom: 0;
+    }
+
+    .header{
+        margin-bottom: 30px;
+
+        .title{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.perfect-scrollbar-on{
+    .sidebar,
+    .main-panel{
+        height: 100%;
+        max-height: 100%;
+    }
+}
+
+
+.sidebar,
+.main-panel,
+.sidebar-wrapper{
+    -webkit-transition-property: top,bottom,width;
+    transition-property: top,bottom, width;
+    -webkit-transition-duration: .2s,.2s, .35s;
+    transition-duration: .2s,.2s, .35s;
+    -webkit-transition-timing-function: linear,linear,ease;
+    transition-timing-function: linear,linear,ease;
+    -webkit-overflow-scrolling: touch;
+}
+
+.visible-on-sidebar-regular{
+    display: inline-block !important;
+}
+.visible-on-sidebar-mini{
+    display: none !important;
+}
+
+@media (min-width: 991px) {
+    .sidebar-mini{
+        .visible-on-sidebar-regular{
+            display: none !important;
+        }
+        .visible-on-sidebar-mini{
+            display: inline-block !important;
+        }
+
+        .sidebar,
+        .sidebar .sidebar-wrapper{
+            width: 80px;
+        }
+
+        .main-panel{
+            width: $sidebar-mini-width;
+        }
+
+        .sidebar{
+            display: block;
+            font-weight: 200;
+            z-index: 9999;
+
+            .logo{
+                a.logo-normal{
+                    opacity: 0;
+                    @include transform-translate-x(-25px);
+                }
+            }
+
+            .sidebar-wrapper{
+                > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+                .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+                .user .user-info > a > span,
+                > .nav li > a p{
+                    @include transform-translate-x(-25px);
+                    opacity: 0;
+                }
+            }
+        }
+
+        .sidebar:hover{
+            width: 260px;
+
+            .logo{
+                a.logo-normal{
+                    opacity: 1;
+                    @include transform-translate-x(0px);
+                }
+            }
+
+            .sidebar-wrapper{
+                width: 260px;
+
+                > .nav li > a p,
+                > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+                .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
+                .user .user-info > a > span{
+                    @include transform-translate-x(0px);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .sidebar {
+      .nav .nav-item {
+        &.active-pro {
+          position: absolute;
+          width: 100%;
+          bottom: 13px;
+        }
+      }
+    }
+}
 
