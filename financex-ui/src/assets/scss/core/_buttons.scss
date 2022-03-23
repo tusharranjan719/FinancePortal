@@ -160,5 +160,98 @@
     border: 0;
 }
 
+// Align icons inside buttons with text
+.btn .material-icons,
+.btn:not(.btn-just-icon):not(.btn-fab) .fa{
+      position: relative;
+      display: inline-block;
+      top: 0;
+      margin-top: -1em;
+      margin-bottom: -1em;
+      font-size: 1.1rem;
+      vertical-align: middle;
+    }
 
+// Disabled buttons and button groups
+.mat-raised-button.btn,
+.input-group-btn .mat-raised-button.btn,
+.btn-group,
+.btn-group-vertical {
+  // have to ratchet up the specificity to kill drop shadows on disabled raised buttons
+  @include bmd-disabled() {
+    .bg-inverse & {
+      color: $bmd-inverse-btn-disabled;
+    }
+
+    // flat buttons shouldn't lose transparency on disabled hover/focus
+  }
+}
+
+// btn-group variations
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  margin: 10px 1px;
+
+  // spec: https://www.google.com/design/spec/components/buttons.html#buttons-toggle-buttons
+  //&.open {
+  //  .dropdown-toggle {
+  //  }
+  //
+  //  > .dropdown-toggle.btn {
+  //    @include bmd-raised-button-color-bg();
+  //  }
+  //}
+
+  .dropdown-menu {
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+
+  &.btn-group-raised {
+    @include box-shadow($bmd-shadow-2dp);
+  }
+
+  .mat-raised-button.btn + .mat-raised-button.btn,
+  .mat-raised-button.btn,
+  .mat-raised-button.btn:active,
+  .btn-group {
+    margin: 0;
+  }
+
+  // remove margin from nested btn-group(s) to properly align them with the outer buttons
+  > .btn-group {
+    margin: 0;
+  }
+
+}
+.btn-group > .mat-raised-button.btn:not(:first-child), .btn-group > .btn-group:not(:first-child) > .mat-raised-button.btn,
+
+.btn-group > .mat-raised-button.btn:not(:first-child) .mat-button-ripple, .btn-group > .btn-group:not(:first-child) > .mat-raised-button.btn .mat-button-ripple,
+
+.btn-group > .mat-raised-button.btn:not(:first-child) .mat-button-focus-overlay, .btn-group > .btn-group:not(:first-child) > .mat-raised-button.btn .mat-button-focus-overlay{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.btn-group > .mat-raised-button.btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-group:not(:last-child) > .mat-raised-button.btn,
+.btn-group > .mat-raised-button.btn:not(:last-child):not(.dropdown-toggle) .mat-button-ripple, .btn-group > .btn-group:not(:last-child) > .mat-raised-button.btn .mat-button-ripple,
+.btn-group > .mat-raised-button.btn:not(:last-child):not(.dropdown-toggle) .mat-button-focus-overlay, .btn-group > .btn-group:not(:last-child) > .mat-raised-button.btn .mat-button-focus-overlay {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-no-ripple .mat-button-ripple{
+  display: none;
+}
+.mat-button, .mat-icon-button {
+    background: transparent;
+}
+.mat-button:hover .mat-button-focus-overlay, .mat-stroked-button:hover .mat-button-focus-overlay{
+  opacity: 0;
+  background-color: transparent!important;
+}
+button:focus {
+  outline: none;
+}
+.mat-button .mat-button-ripple{
+  border-radius: inherit;
+}
 
