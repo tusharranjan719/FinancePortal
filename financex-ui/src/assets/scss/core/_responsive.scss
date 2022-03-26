@@ -181,3 +181,90 @@
         }
     }
 }
+
+@media screen and (max-width: 991px) {
+    .presentation-page {
+      .section-components {
+        .components-macbook {
+          max-width: 850px !important;
+          max-height: 480px !important;
+          margin-top: 12vh;
+          left: -12px;
+        }
+        .coloured-card-img,
+        .table-img {
+          display: none;
+        }
+        .social-img {
+          left: 47%;
+          top: 37%;
+        }
+        .pin-btn-img {
+          top: 54%;
+        }
+        .share-btn-img {
+          top: 12%;
+        }
+        .coloured-card-btn-img {
+          top: -2%;
+          left: 65%;
+        }
+      }
+      .section-content {
+        .area-img {
+          max-width: 130px;
+          max-height: 170px;
+        }
+        .info-img {
+          max-width: 170px;
+          max-height: 120px;
+        }
+      }
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .presentation-page {
+      .section-components {
+        .components-macbook {
+          max-width: 350px !important;
+          max-height: 250px !important;
+          margin-top: 12vh;
+          left: -12px;
+        }
+        .coloured-card-img,
+        .table-img {
+          display: none;
+        }
+        .social-img {
+          left: -7%;
+          top: 37%;
+        }
+        .pin-btn-img {
+          top: 54%;
+        }
+        .share-btn-img {
+          top: 7%;
+        }
+        .coloured-card-btn-img {
+          top: -2%;
+        }
+      }
+    }
+  
+    .presentation-page,
+    .index-page,
+    .section-page{
+      #cd-vertical-nav{
+        display: none;
+      }
+    }
+  
+    .index-page{
+      .cd-section{
+        .tim-typo .tim-note{
+          width: 60px;
+        }
+      }
+    }
+  }
