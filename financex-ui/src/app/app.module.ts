@@ -16,6 +16,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TableListComponent } from './components/table-list/table-list.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     LoginComponent,
     HomepageComponent,
     DashboardComponent,
-    SidebarComponent
+    SidebarComponent,
+    TableListComponent
   ],
   imports: [
     BrowserModule,
