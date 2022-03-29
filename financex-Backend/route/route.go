@@ -15,7 +15,6 @@ import (
 	"kivancaydogmus.com/apps/userApp/service"
 )
 
-
 var counter int
 
 var mutex = &sync.Mutex{}
@@ -92,6 +91,30 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUser(w http.ResponseWriter, r *http.Request) {
+	props := r.Context().Value("props")
+	if myMap, ok := props.(jwt.MapClaims); ok {
+		username := myMap["user_name"]
+		if v, e := username.(string); e {
+			if v == "" {
+				json.NewEncoder(w).Encode("Kindly login again")
+			}
+			person := dbop.Self_ID(v)
+			person.Token = dbop.GetLastLoginToken(v)
+			if person.UserName == "" || person.Token == "" || len(dbop.Valid_Token(person.Token)) == 0 {
+				r.Header.Set("Authorization", "")
+				fmt.Println("deleted auth --> ", r.Header.Get("Authorization"))
+				w.WriteHeader(http.StatusUnauthorized)
+				json.NewEncoder(w).Encode("kindly authenticate")
+			} else {
+				json.NewEncoder(w).Encode(person)
+			}
+		}
+	} else {
+		json.NewEncoder(w).Encode("Unable to fetch the user")
+	}
+}
+
+func getSpecUser(w http.ResponseWriter, r *http.Request) {
 	props := r.Context().Value("props")
 	if myMap, ok := props.(jwt.MapClaims); ok {
 		username := myMap["user_name"]
