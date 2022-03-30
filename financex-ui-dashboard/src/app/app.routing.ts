@@ -10,17 +10,13 @@ import { LoginComponent } from './components/login/login.component';
 const routes: Routes =[
     { path: '', component: HomepageComponent },
   { path: 'login', component: LoginComponent },
-    {
-        path: 'dashboard',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-    },
   {
     path: 'dashboard',
-    redirectTo: 'dashboard',
+    redirectTo: 'dashboard/dashboard',
     pathMatch: 'full',
-  }, {
-    path: '/dashboard',
+  },
+    {
+    path: 'dashboard',
     component: AdminLayoutComponent,
     children: [{
       path: '',
