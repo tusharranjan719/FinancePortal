@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
   });
 
   signupForm = this.fb.group({
+    first_name: ['', Validators.required],
+    last_name: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
     password: ['', Validators.required],
     retype_password: ['', [Validators.required, this.passwordMatcher.bind(this)]]
@@ -64,6 +66,8 @@ export class LoginComponent implements OnInit {
     let formValue = this.signupForm.value;
     //console.log(formValue);
     let postData = {
+      'first_name': formValue.first_name,
+      'last_name': formValue.last_name,
       'username': formValue.email,
       'password': formValue.password
     };

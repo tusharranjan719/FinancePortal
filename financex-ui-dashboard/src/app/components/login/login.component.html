@@ -32,6 +32,19 @@
           </mat-tab>
           <mat-tab label="SignUp">
             <form [formGroup]="signupForm" (submit)="signUpSubmit()">
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" formControlName="first_name" matInput>
+                    <span *ngIf="signUpFormHasError('first_name', 'required')"></span>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Last Name</mat-label>
+                  <input type="text" formControlName="last_name" matInput>
+                  <span *ngIf="signUpFormHasError('last_name', 'required')"></span>
+              </mat-form-field>                
+
                 <mat-form-field class="example-full-width">
                     <mat-label>Email</mat-label>
                     <input type="email" formControlName="email" matInput>
@@ -59,6 +72,7 @@
                     <!-- <mat-icon matSuffix>vpn_key</mat-icon> -->
                 </mat-form-field>
                 <button mat-button color="primary" [disabled]="signupForm.invalid">SignUp</button>
+
             </form>
           </mat-tab>
         </mat-tab-group>
