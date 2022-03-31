@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0;
+     font-family: Roboto, "Helvetica Neue", sans-serif;
+     // background-image: url("LoginBG.jpg") ;
+    background-size: cover; }
+
+// @media (min-width: 1200px) 
+header .navbar {
+     background-color: #222 !important;
+> .container{
+     width: 1170px;
+     padding-right: 15px;
+     padding-left: 15px;
+     margin-right: auto;
+     margin-left: auto;  
+     display: block;
+}
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+     border-color: #A3A3A3;
+
+    margin-right: 0;
+    margin-left: 0;
+    max-height: 340px;
+    padding-right: 0;
+    padding-left: 0;
+    display: block!important;
+    height: auto!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+    visibility: visible!important;
+
+    
+ }
+
+ header .navbar .navbar-nav {
+     align-items: inherit;
+     display: block;
+}
+
+
