@@ -1,0 +1,67 @@
+version: '2.4'
+
+networks: 
+    billsplit:
+        driver: bridge
+
+volumes:
+    postgres_data: {}
+
+services:
+    database:
+        image: postgres:13-alpine
+        container_name: billsplit-database
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=billsplit
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+            - ../database/init:/docker-entrypoint-initdb.d
+        networks:
+            - billsplit
+        expose:
+            - 5432
+        restart: always
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres -h database"]
+            interval: 1s
+            timeout: 5s
+            retries: 5
+            start_period: 2s
+    
+    backend:
+        build:
+            context: ../backend
+        image: billsplit-backend
+        container_name: billsplit-backend
+        environment:
+            - DB_HOST=database
+            - DB_USER=postgres
+            - DB_PASSWORD=password
+            - DB_NAME=billsplit
+        networks:
+            - billsplit
+        ports:
+            - '8010:8010'
+        restart: always
+        depends_on:
+            database:
+                condition: service_healthy
+        command: './bill-split -demo'
+
+    frontend:
+        build:
+            context: ../frontend
+            args: 
+                - VUE_CLI_MODE=production
+        image: billsplit-frontend
+        container_name: billsplit-frontend
+        networks:
+            - billsplit
+        ports:
+            - '8080:8080'
+        restart: always
+        depends_on:
+            - backend
+         
