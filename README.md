@@ -106,7 +106,7 @@ The project's goal is to provide a one-stop financial platform for controlling y
       
 
  **Sprint 2: videos**
-https://youtu.be/3wTg8Z39GMc
+* https://youtu.be/3wTg8Z39GMc
 
 
 
