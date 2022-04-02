@@ -92,6 +92,7 @@ The project's goal is to provide a one-stop financial platform for controlling y
       * Has quick to-do list, to let the user quickly write and remember the bills or transaction they need to settle.
       * Small table for users last 5 recent transactions.
       * Has graphs that overlay and summarises users Annual, Weekly and Daily Average Expenses.
+      * Added additional test cases to cover most functionalaties.
 
 
    * **SIDEBAR**
