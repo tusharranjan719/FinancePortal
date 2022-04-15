@@ -255,3 +255,22 @@ func (billSplit *BillSplit) GetDebts() (debts []Debt, err error) {
 	}
 	return
 }
+
+// ----------
+//Update: Gives ability to update a participant to change its share
+func (billSplit *BillSplit) Update() (items []Update, err error, o_ex int, new_ex int) {
+	rows, err := Db.Query("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.billSplit_id = $1 ORDER BY created_at DESC", billSplit.Id)
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		post := Update{}
+		var c:= o_ex + new_ex
+		if err = rows.Scan(&post.Id, &post.Uuid, &post.Name, &post.Amount, &post.BillSplitID, &post.PayerName, &post.CreatedAt); err != nil {
+			return c
+		}
+		items = append(items, post)
+	}
+	rows.Close()
+	return 
+}
