@@ -116,6 +116,41 @@ describe('It should have FinanceX title', () => {
       cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
     });
   });
+
+  // describe('login url', () => {
+  //   beforeEach(() => {
+  //     cy.visit('/#/login');
+  //   });
+  //   it('first feature has shared expenses', () => {
+  //     cy.get('.mat-card-header').should('be.visible');
+  //   });
+    
+  // });
+
+  describe('login url', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+    it('redirects to another page on click', () => {
+      // cy.on('url:changed', (url) => {
+      //   expect(url).to.contain("login")
+      // });
+      cy.get('.scroll [id^=fin-login]').click({ force: true });
+      //cy.wait(50);
+      cy.get('.mat-card-header').should('be.visible');
+    })
+
+    describe('login url', () => {
+      beforeEach(() => {
+        cy.visit('/#/login');
+      });
+      it('first feature has shared expenses', () => {
+        cy.get('.mat-card-header').should('be.visible');
+      });
+      
+    });
+    
+  });
   
   
   
