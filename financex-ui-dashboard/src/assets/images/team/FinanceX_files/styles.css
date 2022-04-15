@@ -201,10 +201,10 @@ color: #FFFFFF;
 background: #222;
 border-bottom: #48B1DF 1px solid;
 }
-.navbar-nav>li {
+/* .navbar-nav>li {
 border-right: 1px solid #303030;
 border-left: 1px solid #171717;
-}
+} */
  
 
 @media only screen and (min-width: 768px) {
