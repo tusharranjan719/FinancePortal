@@ -248,6 +248,15 @@ func ParticipantExpenseDeleteAll() (err error) {
 	return
 }
 
+func deleteAllExp() (err error) {
+	statement := "delete from expense"
+	_, err = Db.Exec(statement)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return
+}
+
 // SetupDB clears the database completely
 func SetupDB() {
 	err := ParticipantExpenseDeleteAll()
