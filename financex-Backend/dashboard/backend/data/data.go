@@ -228,6 +228,15 @@ func ExpenseDeleteAll() (err error) {
 	return
 }
 
+func DeleteAll() (err error) {
+	statement := "delete from expense"
+	_, err = Db.Exec(statement)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return
+}
+
 // BillSplitDeleteAll deletes all BillSplits from database
 func BillSplitDeleteAll() (err error) {
 	statement := "delete from billsplit"
