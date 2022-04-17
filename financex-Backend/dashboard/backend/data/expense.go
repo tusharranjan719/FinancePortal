@@ -168,3 +168,20 @@ func (expense Expense) Balance() map[string]float64 {
 	}
 	return balance
 }
+
+func (expense Expense) CheckBalance() map[string]float64 {
+	participants, err := expense.ExpenseParticipants()
+	if err != nil {
+		log.Fatal(err)
+	}
+	payer, err := ParticipantByName(expense.PayerName, expense.BillSplitID)
+	if err != nil {
+		log.Fatal(err)
+	}
+	balance := make(map[string]float64)
+	balance[payer.Name] = expense.Amount
+	for _, participant := range participants {
+		balance[participant] += -expense.Amount / float64(len(participants))
+	}
+	return balance
+}
