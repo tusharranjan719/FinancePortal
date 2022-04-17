@@ -61,7 +61,7 @@ func TestExpense_Balance(t *testing.T) {
 
 func TestExpense_ExpenseParticipants(t *testing.T) {
 	InitDb()
-	//SetupDB()
+
 	tests := []struct {
 		name               string
 		nameBill           string
