@@ -1,6 +1,7 @@
 package data
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"sort"
@@ -307,8 +308,11 @@ func (billSplit *BillSplit) Expense_by_participant(name string) (expense Expense
 }
 
 // Calling the participant from DB to get the expenses.
-func (billSplit *BillSplit) ParticipantByName(name string) (participant Participant, err error) {
+func (billSplit *BillSplit) Selected_participant(name string) (participant Participant, err error) {
 	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM participant WHERE name = $1 and billsplit_id= $2", name, billSplit.Id).
 		Scan(&participant.Id, &participant.Uuid, &participant.Name, &participant.CreatedAt)
+	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM participant WHERE name = $3 and billsplit_id= $4", name, billSplit.Id).
+		Scan(&participant.Id, &participant.Uuid, &participant.Name, &participant.CreatedAt)
+		fmt.Print("Participants in this expense are:")
 	return
 }
