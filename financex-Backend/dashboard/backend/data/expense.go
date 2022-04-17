@@ -34,6 +34,23 @@ func (expense *Expense) ExpenseParticipants() (items []string, err error) {
 	return
 }
 
+func (expense *Expense) ParticipantsExpense() (items []string, err error) {
+	//defer db.Close()
+	rows, err := Db.Query("SELECT p.name FROM participant_expense pe INNER JOIN participant p ON p.id = pe.participant_id WHERE pe.expense_id = $1 ORDER BY p.created_at DESC", expense.Id)
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		var participant string
+		if err = rows.Scan(&participant); err != nil {
+			return
+		}
+		items = append(items, participant)
+	}
+	rows.Close()
+	return
+}
+
 // AddParticipant adds one participants to an expense
 func (expense *Expense) AddParticipant(name string) (err error) {
 	//defer db.Close()
