@@ -151,6 +151,61 @@ describe('It should have FinanceX title', () => {
     });
     
   });
+
+  describe('login form submit redirect to user dashboard', () => {
+    beforeEach(() => {
+        cy.visit('/#/login');
+    });
+    it('submit valid form', () => {
+        cy.on('url:changed', (url) => {
+            expect(url).to.contain("dashboard")
+        });
+        cy.get('.mat-form-field-infix [formcontrolname^=email]').type('user@gg.com');
+        cy.get('.mat-form-field-infix [formcontrolname^=password]').type('user@gg.com');
+        cy.wait(100);
+        cy.get('form').submit();
+    });
+});
+
+describe('sign In', () => {
+    it('sign In', () => {
+        cy.intercept('POST', '/signIn', {
+            statusCode: 201
+          }).as('new-user')
+        cy.request('POST', '/signIn', {
+            name: 'Sankalp',
+            password: 'tdlr',
+        }).then((response: any) => {
+            cy.log(response)
+            console.log(response)
+            //expect(response.statusCode).to.eq(201)
+            expect(response.body['name']).to.be.eq('Sankalp');
+        })
+        cy.request('POST', '/new-user', {
+            name: 'Sankalp',
+            password: 'tdlr',
+        }).then((response: any) => {
+            cy.log(response)
+            console.log(response)
+        })
+        cy.get('@new-user').then(console.log)
+    })
+        
+})
+
+
+describe('get all users info', () => {
+    beforeEach(() => {
+        cy.visit('/#/dashboard/dashboard');
+    });
+    it('get user', () => {
+        cy.wait(10000)
+        cy.request('GET', '/users').then((response) => {
+            expect(response.body).to.be.a('array');
+        })
+    });
+    
+});
   
   
   
