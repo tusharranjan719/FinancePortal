@@ -206,6 +206,12 @@ func SearchExpenseByUuid(name string) (expense Expense, err error) {
 	return
 }
 
+func SearchParticipantByUUID(uuid string) (participant Participant, err error) {
+	err = Db.QueryRow("SELECT id, uuid, name, billsplit_id, created_at FROM participant WHERE uuid = $1", uuid).
+		Scan(&participant.Id, &participant.Uuid, &participant.Name, &participant.BillSplitID, &participant.CreatedAt)
+	return
+}
+
 // ParticipantByID gets an Participant record in the DB by its id (unique)
 func ParticipantByID(id int) (participant Participant, err error) {
 	err = Db.QueryRow("SELECT id, uuid, name, billsplit_id, created_at FROM participant WHERE id = $1", id).
