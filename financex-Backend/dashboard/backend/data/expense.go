@@ -34,7 +34,7 @@ func (expense *Expense) ExpenseParticipants() (items []string, err error) {
 	return
 }
 
-func (expense *Expense) ParticipantsExpense() (items []string, err error) {
+func (expense *Expense) ParticipantsExpenses() (items []string, err error) {
 	//defer db.Close()
 	rows, err := Db.Query("SELECT p.name FROM participant_expense pe INNER JOIN participant p ON p.id = pe.participant_id WHERE pe.expense_id = $1 ORDER BY p.created_at DESC", expense.Id)
 	if err != nil {
@@ -53,6 +53,24 @@ func (expense *Expense) ParticipantsExpense() (items []string, err error) {
 
 // AddParticipant adds one participants to an expense
 func (expense *Expense) AddParticipant(name string) (err error) {
+	//defer db.Close()
+	participant, err := ParticipantByName(name, expense.BillSplitID)
+	if err != nil {
+		return
+	}
+	participantId := participant.Id
+	statement := "insert into participant_expense(participant_id, expense_id) values ($1, $2) returning id, participant_id, expense_id"
+	stmt, err := Db.Prepare(statement)
+	if err != nil {
+		return
+	}
+	defer stmt.Close()
+	// use QueryRow to return a row and scan the returned id into the Session struct
+	_, err = stmt.Exec(participantId, expense.Id)
+	return
+}
+
+func (expense *Expense) AddSingleParticipant(name string) (err error) {
 	//defer db.Close()
 	participant, err := ParticipantByName(name, expense.BillSplitID)
 	if err != nil {
