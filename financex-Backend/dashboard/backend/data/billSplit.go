@@ -274,3 +274,41 @@ func (billSplit *BillSplit) Update() (items []Update, err error, o_ex int, new_e
 	rows.Close()
 	return 
 }
+
+
+// CreateParticipant : New Participant
+// name: name of the participant to create
+func (billSplit *BillSplit) Multiple_Participant(name string) (participant Participant, err error) {
+	//defer db.Close()
+	statement := "insert into participant (uuid, name, billsplit_id, created_at) values ($1, $2, $3, $4) returning id, uuid, name, billSplit_id, created_at"
+	statement := "insert into participant (uuid, name, billsplit_id, created_at) values ($1, $2, $3, $4) returning id, uuid, name, billSplit_id, created_at"
+	stmt, err := Db.Prepare(statement)
+	if err != nil {
+		return
+	}
+	defer stmt.Close()
+	// Returning rows and the scanned IDs to session struct
+	err = stmt.QueryRow(createUUID(), name, billSplit.Id, time.Now()).Scan(&participant.Id, &participant.Uuid, &participant.Name, &participant.BillSplitID, &participant.CreatedAt)
+	if err != nil {
+		return
+	}
+	if err == nil {
+		return 0
+	}
+	return
+}
+
+
+// Getting the expense from DB and matching it to the participant
+func (billSplit *BillSplit) Expense_by_participant(name string) (expense Expense, err error) {
+	err = Db.QueryRow("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.uuid = $1 and e.billsplit_id = $2", name, billSplit.Id).
+		Scan(&expense.Id, &expense.Uuid, &expense.Name, &expense.Amount, &expense.BillSplitID, &expense.PayerName, &expense.CreatedAt)
+	return
+}
+
+// Calling the participant from DB to get the expenses.
+func (billSplit *BillSplit) ParticipantByName(name string) (participant Participant, err error) {
+	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM participant WHERE name = $1 and billsplit_id= $2", name, billSplit.Id).
+		Scan(&participant.Id, &participant.Uuid, &participant.Name, &participant.CreatedAt)
+	return
+}
