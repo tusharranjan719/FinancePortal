@@ -187,6 +187,42 @@ describe('login form submit redirect to user dashboard', () => {
   });
 });
 
+describe('user profile link click redirects to its page', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  it('redirects user profile', () => {
+      cy.on('url:changed', (url) => {
+          expect(url).to.contain("user-profile")
+      });
+    cy.get('.sidebar-wrapper .nav li:nth-child(n+2):nth-child(-n+2) a').click({ force: true });
+  })
+});
+
+describe('user profile link click redirects to its page', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  it('redirects user profile', () => {
+      cy.on('url:changed', (url) => {
+          expect(url).to.contain("table-list")
+      });
+    cy.get('.sidebar-wrapper .nav li:nth-child(n+3):nth-child(-n+3) a').click({ force: true });
+  })
+});
+
+describe('user profile link click redirects to its page', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  it('redirects user profile', () => {
+      cy.on('url:changed', (url) => {
+          expect(url).to.contain("notifications")
+      });
+    cy.get('.sidebar-wrapper .nav li:nth-child(n+4):nth-child(-n+4) a').click({ force: true });
+  })
+});
+
 describe('sign In', () => {
   it('sign In', () => {
     cy.intercept('POST', '/signIn', {
