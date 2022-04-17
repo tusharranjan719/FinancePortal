@@ -127,6 +127,23 @@ describe('It should have FinanceX title', () => {
       cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
     });
   });
+  describe('Dashboard page should have 5 li nav items', () => {
+    beforeEach(() => {
+      cy.visit('/#/dashboard/dashboard');
+    });
+    it('has 5 sidebar navs', () => {
+      cy.get('.sidebar-wrapper .nav').find('li').should('have.length', 5);
+    });
+  });
+
+  describe('Dashboard page should have dashboard link active', () => {
+    beforeEach(() => {
+      cy.visit('/#/dashboard/dashboard');
+    });
+    it('dashboard link active', () => {
+      cy.get('.sidebar-wrapper .nav li:first').should('have.class', 'active');
+    });
+  });
 
   // Functional Test Cases
 
