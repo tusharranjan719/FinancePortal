@@ -16,5 +16,17 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": false
+    },
+    "/new-user/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/user_billing_info/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
     }
 }
