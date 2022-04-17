@@ -4,13 +4,15 @@ import (
 	"crypto/rand"
 	"database/sql"
 	"fmt"
+
 	// Postgres driver lib
-	_ "github.com/lib/pq"
 	"log"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	_ "github.com/lib/pq"
 )
 
 var (
@@ -111,6 +113,16 @@ func CreateBillSplit(name string) (billsplit BillSplit, err error) {
 	return
 }
 
+func GetEnvironment(key, fallback string) string {
+	value := os.Getenv(key)
+	if len(value) == 0 {
+		fmt.Println(key, fallback)
+		return fallback
+	}
+	fmt.Println(key, value)
+	return value
+}
+
 // BillSplits gets all BillSplit records in the DB
 func BillSplits() (billSplits []BillSplit, err error) {
 	//defer db.Close()
@@ -168,6 +180,23 @@ func ParticipantByUUID(uuid string) (participant Participant, err error) {
 func ParticipantByName(uuid string, billsplitID int) (participant Participant, err error) {
 	err = Db.QueryRow("SELECT id, uuid, name, billsplit_id, created_at FROM participant WHERE name = $1 and billsplit_id=$2", uuid, billsplitID).
 		Scan(&participant.Id, &participant.Uuid, &participant.Name, &participant.BillSplitID, &participant.CreatedAt)
+	return
+}
+
+func SplitBill() (billSplits []BillSplit, err error) {
+	//defer db.Close()
+	rows, err := Db.Query("SELECT id, uuid, name, created_at FROM billsplit ORDER BY created_at DESC")
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		conv := BillSplit{}
+		if err = rows.Scan(&conv.Id, &conv.Uuid, &conv.Name, &conv.CreatedAt); err != nil {
+			return
+		}
+		billSplits = append(billSplits, conv)
+	}
+	rows.Close()
 	return
 }
 
