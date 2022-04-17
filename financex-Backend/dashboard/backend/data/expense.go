@@ -120,6 +120,37 @@ func (expense *Expense) AddParticipants(names []string) (err error) {
 	return
 }
 
+func (expense *Expense) AddMultipleParticipants(names []string) (err error) {
+
+	billSplit, err := BillSplitByID(expense.BillSplitID)
+	if err != nil {
+		log.Fatal(err)
+	}
+	participants, err := billSplit.ParticipantsByName(names)
+	if err != nil {
+		log.Fatal(err)
+	}
+	sqlStr := "insert into participant_expense(participant_id, expense_id) VALUES "
+	vals := []interface{}{}
+
+	for _, row := range participants {
+		sqlStr += "(?, ?),"
+		vals = append(vals, row.Id, expense.Id)
+	}
+	//trim the last ,
+	sqlStr = strings.TrimSuffix(sqlStr, ",")
+
+	//Replacing ? with $n for postgres
+	sqlStr = ReplaceSQL(sqlStr, "?", 1)
+
+	//prepare the statement
+	stmt, _ := Db.Prepare(sqlStr)
+
+	//format all vals at once
+	_, err = stmt.Exec(vals...)
+	return
+}
+
 // Balance gets the balance of each participants of the expense
 func (expense Expense) Balance() map[string]float64 {
 	participants, err := expense.ExpenseParticipants()
