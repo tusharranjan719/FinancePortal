@@ -116,16 +116,19 @@ describe('It should have FinanceX title', () => {
       cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
     });
   });
+  describe('It should show all 3 features', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+    it('has 3 features', () => {
+      cy.get('[id^=features] .features').children().should('have.length', 3);
+    });
+    it('first feature has shared expenses', () => {
+      cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
+    });
+  });
 
-  // describe('login url', () => {
-  //   beforeEach(() => {
-  //     cy.visit('/#/login');
-  //   });
-  //   it('first feature has shared expenses', () => {
-  //     cy.get('.mat-card-header').should('be.visible');
-  //   });
-    
-  // });
+  // Functional Test Cases
 
   describe('login url', () => {
     beforeEach(() => {
