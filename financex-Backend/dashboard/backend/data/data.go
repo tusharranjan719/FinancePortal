@@ -235,6 +235,12 @@ func ParticipantByID(id int) (participant Participant, err error) {
 	return
 }
 
+func SearchExpense(name string) (expense Expense, err error) {
+	err = Db.QueryRow("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.uuid = $1", name).
+		Scan(&expense.Id, &expense.Uuid, &expense.Name, &expense.Amount, &expense.BillSplitID, &expense.PayerName, &expense.CreatedAt)
+	return
+}
+
 // ParticipantDeleteAll deletes all Participants from database
 func ParticipantDeleteAll() (err error) {
 	//defer db.Close()
