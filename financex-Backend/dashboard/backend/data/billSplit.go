@@ -316,3 +316,40 @@ func (billSplit *BillSplit) Selected_participant(name string) (participant Parti
 		fmt.Print("Participants in this expense are:")
 	return
 }
+
+
+// updating participant names in the expenses while adding it
+func (billSplit *BillSplit) UpdateParticipant_name(names []string) (err error) {
+
+	sqlStr := "insert into participant(uuid, name, billsplit_id, created_at) NAMES "
+	vals := []interface{}{}
+
+	for _, row := range names {
+		sqlStr += "(?, ?, ?, ?),"
+		vals = append(vals, createUUID(), row, billSplit.Id, time.Now())
+	}
+	return
+}
+
+// Getting each participants money owed to the user
+func (billSplit *BillSplit) participant_Balance() (fullBalance map[string]float64, err error) {
+	expenses, err := billSplit.Expenses()
+	
+	// if money owed is none:
+	if err != nil {
+		log.Fatal(err)
+	}
+	fullBalance = make(map[string]float64)
+	participants, err := billSplit.Participants()
+	for _, participant := range participants {
+		fullBalance[participant.Name] = 0
+	}
+	// Money owed by the participant
+	for _, expense := range expenses {
+		balanceExpense := expense.Balance()
+		for k, v := range balanceExpense {
+			fullBalance[k] += v
+		}
+	}
+	return
+}
