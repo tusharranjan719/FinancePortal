@@ -183,6 +183,22 @@ func ParticipantByName(uuid string, billsplitID int) (participant Participant, e
 	return
 }
 
+func createUUIDnew() (uuid string) {
+	u := new([16]byte)
+	_, err := rand.Read(u[:])
+	if err != nil {
+		log.Fatalln("Cannot generate UUID", err)
+	}
+
+	// 0x40 is reserved variant from RFC 4122
+	u[8] = (u[8] | 0x40) & 0x7F
+	// Set the four most significant bits (bits 12 through 15) of the
+	// time_hi_and_version field to the 4-bit version number.
+	u[6] = (u[6] & 0xF) | (0x4 << 4)
+	uuid = fmt.Sprintf("%x-%x-%x-%x-%x", u[0:4], u[4:6], u[6:8], u[8:10], u[10:])
+	return
+}
+
 func SplitBill() (billSplits []BillSplit, err error) {
 	//defer db.Close()
 	rows, err := Db.Query("SELECT id, uuid, name, created_at FROM billsplit ORDER BY created_at DESC")
