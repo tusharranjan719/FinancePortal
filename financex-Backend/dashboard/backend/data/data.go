@@ -271,6 +271,26 @@ func DeleteAll() (err error) {
 	return
 }
 
+func SplitByUUID(uuid string) (billSplit BillSplit, err error) {
+	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM billsplit WHERE uuid = $1", uuid).
+		Scan(&billSplit.Id, &billSplit.Uuid, &billSplit.Name, &billSplit.CreatedAt)
+	return
+}
+
+// BillSplitByID gets a BillSplit record in the DB by its id
+func SplitByID(id int) (billSplit BillSplit, err error) {
+	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM billsplit WHERE id = $1", id).
+		Scan(&billSplit.Id, &billSplit.Uuid, &billSplit.Name, &billSplit.CreatedAt)
+	return
+}
+
+// BillSplitByName gets a BillSplit record in the DB by its name (unique)
+func SplitByName(name string) (billSplit BillSplit, err error) {
+	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM billsplit WHERE name = $1", name).
+		Scan(&billSplit.Id, &billSplit.Uuid, &billSplit.Name, &billSplit.CreatedAt)
+	return
+}
+
 // BillSplitDeleteAll deletes all BillSplits from database
 func BillSplitDeleteAll() (err error) {
 	statement := "delete from billsplit"
