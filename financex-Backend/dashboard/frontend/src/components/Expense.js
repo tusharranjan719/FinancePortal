@@ -39,7 +39,7 @@
             </div>
             <div>
                               <v-subheader>Amount</v-subheader>
-                              {{parseFloat(Expense.Amount).toFixed( 2 )}}€
+                              {{parseFloat(Expense.Amount).toFixed( 2 )}}$
             </div>
                 
              <v-list >

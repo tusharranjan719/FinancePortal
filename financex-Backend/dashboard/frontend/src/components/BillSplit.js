@@ -68,7 +68,7 @@
 
                 <v-list-item-content>
                     <v-list-item-title  v-text="item.Name"></v-list-item-title>
-                    <v-list-item-subtitle>   Payed By: <b>{{item.PayerName}}</b>   Amount: <b>{{parseFloat(item.Amount).toFixed( 2 )}}€</b>    Payed at: <b>{{item.CreatedAt}}</b>      </v-list-item-subtitle>
+                    <v-list-item-subtitle>   Payed By: <b>{{item.PayerName}}</b>   Amount: <b>{{parseFloat(item.Amount).toFixed( 2 )}}$</b>    Payed at: <b>{{item.CreatedAt}}</b>      </v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-action>

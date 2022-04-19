@@ -41,10 +41,10 @@
                 :key="key"
                 >
                 <v-list-item-content v-if="parseFloat(value) >= 0">
-                    <v-list-item-title>  <b>{{key}}</b>   Balance: <b style="color:green">{{parseFloat(value).toFixed( 2 )}}€</b>    </v-list-item-title>
+                    <v-list-item-title>  <b>{{key}}</b>   Balance: <b style="color:green">{{parseFloat(value).toFixed( 2 )}}$</b>    </v-list-item-title>
                 </v-list-item-content>              
                 <v-list-item-content v-else>
-                    <v-list-item-title>  <b>{{key}}</b>   Balance:  <b style="color:red">{{parseFloat(value).toFixed( 2 )}}€</b>  </v-list-item-title>
+                    <v-list-item-title>  <b>{{key}}</b>   Balance:  <b style="color:red">{{parseFloat(value).toFixed( 2 )}}$</b>  </v-list-item-title>
                 </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -64,7 +64,7 @@
                 :key="index"
                 >
                 <v-list-item-content>
-                    <v-list-item-title>  <b>{{item.Debtor}}</b>   owes <b>{{item.Creditor}}</b>  <b>{{parseFloat(item.Amount).toFixed( 2 )}}€</b>      </v-list-item-title>
+                    <v-list-item-title>  <b>{{item.Debtor}}</b>   owes <b>{{item.Creditor}}</b>  <b>{{parseFloat(item.Amount).toFixed( 2 )}}$</b>      </v-list-item-title>
                 </v-list-item-content>
 
                 </v-list-item>
