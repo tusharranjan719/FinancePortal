@@ -70,6 +70,23 @@ func (billSplit *BillSplit) Expenses() (items []Expense, err error) {
 	return
 }
 
+func (billSplit *BillSplit) Expenses_new() (items []Expense, err error) {
+	//defer db.Close()
+	rows, err := Db.Query("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.billSplit_id = $1 ORDER BY created_at DESC", billSplit.Id)
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		post := Expense{}
+		if err = rows.Scan(&post.Id, &post.Uuid, &post.Name, &post.Amount, &post.BillSplitID, &post.PayerName, &post.CreatedAt); err != nil {
+			return
+		}
+		items = append(items, post)
+	}
+	rows.Close()
+	return
+}
+
 // ExpenseByUuid : Gets an expense in the DB by uuid
 func (billSplit *BillSplit) ExpenseByUuid(name string) (expense Expense, err error) {
 	err = Db.QueryRow("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.uuid = $1 and e.billsplit_id = $2", name, billSplit.Id).
