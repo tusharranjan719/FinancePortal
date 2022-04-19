@@ -367,6 +367,19 @@ describe('get all expenses by billsplitid', () => {
   });
 });
 
+describe('get particular expenses by id', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  
+  it('gets expense by id', () => {
+      cy.wait(2000);
+      cy.request('GET', '/expense/1').then((response) => {
+          expect(response.body['payerName']).to.be.eq("Sankalp");
+      })
+  });
+});
+
 
 
 
