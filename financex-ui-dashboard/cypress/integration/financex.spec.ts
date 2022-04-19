@@ -333,6 +333,27 @@ describe('new bill split group', () => {
   })
 });
 
+describe('create new expense', () => {
+  it('create new expense', () => {
+    cy.wait(2000)
+    cy.intercept('POST', '/billsplit/1/expense/new', {
+      statusCode: 201
+    }).as('new-expense')
+    cy.request('POST', '/billsplit/1/expense/new', {
+      name: 'billsplitgroup1',
+      amount: 2000,
+      payerName: "Sankalp",
+      billSplitId: 2
+    }).then((response: any) => {
+      cy.log(response)
+      console.log(response)
+      //expect(response.statusCode).to.eq(201)
+      expect(response.body['payerName']).to.be.eq('Sankalp');
+    })
+    cy.get('@new-expense').then(console.log)
+  })
+});
+
 
 
 
