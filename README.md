@@ -81,10 +81,6 @@ The project's goal is to provide a one-stop financial platform for controlling y
   * https://app.swaggerhub.com/apis-docs/tusharranjan719/FinanceX/1.0.0
 
 
- **Sprint 2: videos**
-  * https://youtu.be/3wTg8Z39GMc
-
-
 ## Sprint 3: Tasks Completed 
 
 **Completed Homepage Layout**
@@ -109,6 +105,9 @@ The project's goal is to provide a one-stop financial platform for controlling y
       * Has the quick notification option to see the recent transactions.
       * Includes the user profile button to display the entire user information. 
 
+ **Sprint 3: videos**
+  * https://youtu.be/3wTg8Z39GMc
+
 ## Sprint 4: Tasks Completed
 
 **Project Description**
@@ -118,8 +117,11 @@ FinanceX is a service that simplifies bill splitting with friends and family. Th
 **Targets Acheived**
 
 
- **Cypress Testcases video**
- * https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
+
+
+**Sprint 4: Videos**
+  * Deliverables : https://www.youtube.com/watch?v=QAt5Vaahg9Y
+  * Cypress Testcases video : https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
 
 
 
