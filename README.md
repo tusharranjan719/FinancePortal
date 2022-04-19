@@ -104,7 +104,13 @@ The project's goal is to provide a one-stop financial platform for controlling y
       * Includes the search bar for any assistance user needs on the application.
       * Has the quick notification option to see the recent transactions.
       * Includes the user profile button to display the entire user information. 
-      
+
+## Sprint 4: Tasks Completed
+
+ * **Cypress Testcases video**
+ * https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
+
+
 
  **Sprint 2: videos**
 * https://youtu.be/3wTg8Z39GMc
