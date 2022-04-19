@@ -81,6 +81,10 @@ The project's goal is to provide a one-stop financial platform for controlling y
   * https://app.swaggerhub.com/apis-docs/tusharranjan719/FinanceX/1.0.0
 
 
+ **Sprint 2: videos**
+  * https://youtu.be/3wTg8Z39GMc
+
+
 ## Sprint 3: Tasks Completed 
 
 **Completed Homepage Layout**
@@ -107,13 +111,25 @@ The project's goal is to provide a one-stop financial platform for controlling y
 
 ## Sprint 4: Tasks Completed
 
- * **Cypress Testcases video**
+**Project Description**
+
+FinanceX is a service that simplifies bill splitting with friends and family. There are several options for splitting your invoices and payments through the site. You are greeted with an overview of our website and an introduction to the people behind it. You may easily join our portal by just logging in or creating a profile. The interface is interactive, allowing you to adjust the amount of money owed and divided in real time for every trip you plan. You may see your daily, weekly, or monthly spending in graphical and tabular forms on the dashboard. We have a simple navigation bar where you may get alerts whenever an expense is modified. You may even look up the charges that you were reminded to pay with our search option. The simple sidebar allows you to browse your profile, change it, and monitor your latest transactions. We centralize all of your shared spending and “I owe you’s” so that everyone knows who owes what. FinanceX makes life easier, whether you're splitting a holiday with friends, splitting rent with roommates, or repaying someone for lunch. 
+
+**Targets Acheived**
+
+
+ **API Documentation**
+  * Api Documentaion has been done using Swagger and can be viewed with the below link.
+  * https://app.swaggerhub.com/apis-docs/tusharranjan719/FinanceX/1.0.0
+
+ **Cypress Testcases video**
  * https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
 
 
 
- **Sprint 2: videos**
-* https://youtu.be/3wTg8Z39GMc
+
+
+
 
 
 
