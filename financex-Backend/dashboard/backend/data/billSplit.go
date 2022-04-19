@@ -353,3 +353,11 @@ func (billSplit *BillSplit) participant_Balance() (fullBalance map[string]float6
 	}
 	return
 }
+
+// Part_id: Returns the participant_id 
+func (billSplit *BillSplit) Part_id(name string) (participant Participant, err error) {
+	err = Db.QueryRow("SELECT id, uuid, name, created_at FROM participant WHERE name = $1 and billsplit_id= $2", name, billSplit.Id).
+		Scan(&participant.Id, &participant.Id, &participant.CreatedAt)
+		fmt.Print("The Participant with ID owes:")
+	return
+}

@@ -292,3 +292,5 @@ func TestBillSplit_ParticipantsByName(t *testing.T) {
 		log.Fatal(err)
 	}
 }
+
+
