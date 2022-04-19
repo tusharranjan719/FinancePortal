@@ -35,6 +35,23 @@ func (billSplit *BillSplit) Participants() (items []Participant, err error) {
 	return
 }
 
+func (billSplit *BillSplit) Participants_new() (items []Participant, err error) {
+	//defer db.Close()
+	rows, err := Db.Query("SELECT id, uuid, name, billsplit_id, created_at FROM participant where billsplit_id = $1 ORDER BY created_at DESC", billSplit.Id)
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		post := Participant{}
+		if err = rows.Scan(&post.Id, &post.Uuid, &post.Name, &post.BillSplitID, &post.CreatedAt); err != nil {
+			return
+		}
+		items = append(items, post)
+	}
+	rows.Close()
+	return
+}
+
 //Expenses: Total expenses in the database to be splitted
 func (billSplit *BillSplit) Expenses() (items []Expense, err error) {
 	//defer db.Close()
