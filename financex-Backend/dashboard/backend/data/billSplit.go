@@ -35,8 +35,42 @@ func (billSplit *BillSplit) Participants() (items []Participant, err error) {
 	return
 }
 
+func (billSplit *BillSplit) Participants_new() (items []Participant, err error) {
+	//defer db.Close()
+	rows, err := Db.Query("SELECT id, uuid, name, billsplit_id, created_at FROM participant where billsplit_id = $1 ORDER BY created_at DESC", billSplit.Id)
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		post := Participant{}
+		if err = rows.Scan(&post.Id, &post.Uuid, &post.Name, &post.BillSplitID, &post.CreatedAt); err != nil {
+			return
+		}
+		items = append(items, post)
+	}
+	rows.Close()
+	return
+}
+
 //Expenses: Total expenses in the database to be splitted
 func (billSplit *BillSplit) Expenses() (items []Expense, err error) {
+	//defer db.Close()
+	rows, err := Db.Query("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.billSplit_id = $1 ORDER BY created_at DESC", billSplit.Id)
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		post := Expense{}
+		if err = rows.Scan(&post.Id, &post.Uuid, &post.Name, &post.Amount, &post.BillSplitID, &post.PayerName, &post.CreatedAt); err != nil {
+			return
+		}
+		items = append(items, post)
+	}
+	rows.Close()
+	return
+}
+
+func (billSplit *BillSplit) Expenses_new() (items []Expense, err error) {
 	//defer db.Close()
 	rows, err := Db.Query("SELECT e.id, e.uuid, e.name, e.amount, e.billsplit_id, p.name, e.created_at FROM expense e INNER JOIN participant p ON e.participant_id = p.id where e.billSplit_id = $1 ORDER BY created_at DESC", billSplit.Id)
 	if err != nil {
@@ -117,6 +151,29 @@ func (billSplit *BillSplit) CreateParticipant(name string) (participant Particip
 // CreateParticipants : Multiple participants
 // name: names of the participants to create
 func (billSplit *BillSplit) CreateParticipants(names []string) (err error) {
+
+	sqlStr := "insert into participant(uuid, name, billsplit_id, created_at) VALUES "
+	vals := []interface{}{}
+
+	for _, row := range names {
+		sqlStr += "(?, ?, ?, ?),"
+		vals = append(vals, createUUID(), row, billSplit.Id, time.Now())
+	}
+	//trim the last ,
+	sqlStr = strings.TrimSuffix(sqlStr, ",")
+
+	//Replacing ? with $n for postgres
+	sqlStr = ReplaceSQL(sqlStr, "?", 1)
+
+	//prepare the statement
+	stmt, _ := Db.Prepare(sqlStr)
+
+	//format all vals at once
+	_, err = stmt.Exec(vals...)
+	return
+}
+
+func (billSplit *BillSplit) CreateMultiParticipants(names []string) (err error) {
 
 	sqlStr := "insert into participant(uuid, name, billsplit_id, created_at) VALUES "
 	vals := []interface{}{}

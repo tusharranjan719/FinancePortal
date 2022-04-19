@@ -121,6 +121,9 @@ FinanceX is a service that simplifies bill splitting with friends and family. Th
   * Deliverables : https://www.youtube.com/watch?v=QAt5Vaahg9Y
   * Cypress Testcases video : https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
 
+ **API Documentation**
+  * Api Documentaion has been done using Swagger and can be viewed with the below link.
+  * https://app.swaggerhub.com/apis-docs/tusharranjan719/FinanceX/1.0.0
 
 
 
