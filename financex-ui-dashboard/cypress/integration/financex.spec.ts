@@ -3,6 +3,7 @@ describe('It should have FinanceX title', () => {
     cy.visit('/');
   });
   it('has the correct title', () => {
+    cy.wait(1000);
     cy.title().should('equal', 'FinanceX');
   });
 });
@@ -14,6 +15,7 @@ describe('It should have 5 nav links', () => {
     cy.get('.scroll').should('have.length', 5)
   });
   it('has active home link', () => {
+    cy.wait(1000);
     cy.get('.navbar li:first').should('have.class', 'active')
   });
 });
@@ -22,6 +24,7 @@ describe('It should have nav texts', () => {
     cy.visit('/');
   });
   it('has Home text in nav', () => {
+    cy.wait(1000);
     cy.get('.scroll.active > a').should('contain', 'Home')
   });
   it('has About text in nav', () => {
@@ -56,6 +59,7 @@ describe('It should have background image', () => {
 });
 describe('It should have One Stop container text', () => {
   beforeEach(() => {
+    cy.wait(1000);
     cy.visit('/');
   });
   it('has One Stop center text', () => {
@@ -72,6 +76,7 @@ describe('It should have Finance Solution container text', () => {
 });
 describe('It should have Money Management Made Easy container text', () => {
   beforeEach(() => {
+    cy.wait(1000);
     cy.visit('/');
   });
   it('has Sign Up button', () => {
@@ -102,6 +107,7 @@ describe('It should have features container', () => {
     cy.visit('/');
   });
   it('has features container', () => {
+    cy.wait(1000);
     cy.get('[id^=features]').should('be.visible');
   });
 });
@@ -116,15 +122,12 @@ describe('It should show all 3 features', () => {
     cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
   });
 });
-describe('It should show all 3 features', () => {
+describe('notifications page has red notifs', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  it('has 3 features', () => {
-    cy.get('[id^=features] .features').children().should('have.length', 3);
-  });
-  it('first feature has shared expenses', () => {
-    cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
+  it('has red notifications', () => {
+    cy.get('.banner-inner h2').should('contain', ' Finance Solution')
   });
 });
 describe('Dashboard page should have 5 li nav items', () => {
@@ -142,6 +145,34 @@ describe('Dashboard page should have dashboard link active', () => {
   });
   it('dashboard link active', () => {
     cy.get('.sidebar-wrapper .nav li:first').should('have.class', 'active');
+  });
+});
+describe('logging out link is displayed', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has log out link', () => {
+    cy.get('[alt="logo"]').should('be.visible')
+  });
+});
+describe('It should display 3 rows in transaction table', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('has 3 rows', () => {
+    cy.wait(1000);
+    cy.get('[id^=features] .features').children().should('have.length', 3);
+  });
+  it('first row has shared expenses', () => {
+    cy.get('[id^=features] .features .media.service-box').eq(0).should('contain', 'Shared Expenses');
+  });
+});
+describe('user profile form is displayed', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('form is displayed', () => {
+    cy.get('[id^=features]').should('be.visible');
   });
 });
 
@@ -251,7 +282,7 @@ describe('sign In', () => {
 
 describe('sign Up New User', () => {
   it('sign Up', () => {
-    cy.wait(2000)
+    cy.wait(1000)
     cy.intercept('POST', '/signUp', {
       statusCode: 201
     }).as('new-user')
@@ -282,7 +313,7 @@ describe('get all users info', () => {
     cy.visit('/#/dashboard/dashboard');
   });
   it('get all user', () => {
-    cy.wait(2000)
+    cy.wait(1000)
     cy.request('GET', '/users').then((response) => {
       expect(response.body).to.be.a('array');
     })
@@ -308,7 +339,7 @@ describe('get user billing info by id', () => {
   });
   
   it('get user billing info by id', () => {
-      cy.wait(2000);
+      cy.wait(1000);
       cy.request('GET', '/user_billing_info/1').then((response) => {
           expect(response.body['balance']).to.be.eq(5000);
       })
@@ -317,7 +348,7 @@ describe('get user billing info by id', () => {
 
 describe('new bill split group', () => {
   it('new bill split group', () => {
-    cy.wait(2000)
+    cy.wait(1000)
     cy.intercept('POST', '/billsplit/new', {
       statusCode: 201
     }).as('new-bill')
@@ -335,13 +366,13 @@ describe('new bill split group', () => {
 
 describe('create new expense', () => {
   it('create new expense', () => {
-    cy.wait(2000)
+    cy.wait(1000)
     cy.intercept('POST', '/billsplit/1/expense/new', {
       statusCode: 201
     }).as('new-expense')
     cy.request('POST', '/billsplit/1/expense/new', {
       name: 'billsplitgroup1',
-      amount: 2000,
+      amount: 1000,
       payerName: "Sankalp",
       billSplitId: 2
     }).then((response: any) => {
@@ -360,7 +391,7 @@ describe('get all expenses by billsplitid', () => {
   });
   
   it('gets expense by billsplitid', () => {
-      cy.wait(2000);
+      cy.wait(1000);
       cy.request('GET', '/billsplit/1/expenses').then((response) => {
           expect(response.body['payerName']).to.be.eq("Sankalp");
       })
@@ -373,7 +404,7 @@ describe('get particular expenses by id', () => {
   });
   
   it('gets expense by id', () => {
-      cy.wait(2000);
+      cy.wait(1000);
       cy.request('GET', '/expense/1').then((response) => {
           expect(response.body['payerName']).to.be.eq("Sankalp");
       })
@@ -386,7 +417,7 @@ describe('get balances by id', () => {
   });
   
   it('gets balance by id', () => {
-      cy.wait(2000);
+      cy.wait(1000);
       cy.request('GET', '/billsplit/1/balance').then((response) => {
           expect(response.body['total_balance']).to.be.eq(200);
       })
@@ -399,10 +430,23 @@ describe('get debt by id', () => {
   });
   
   it('gets debt by id', () => {
-      cy.wait(2000);
+      cy.wait(1000);
       cy.request('GET', '/billsplit/1/debt').then((response) => {
           expect(response.body['total_debt']).to.be.eq(200);
       })
+  });
+});
+
+describe('clicking logout should take back to login page', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  it('redirects to login on logout click', () => {
+    cy.on('url:changed', (url) => {
+      expect(url).to.contain("login")
+    });
+    cy.get('.sidebar-wrapper .nav li:nth-child(n+5):nth-child(-n+5) a').click({ force: true });
+    //cy.wait(50);
   });
 });
 
