@@ -81,6 +81,10 @@ The project's goal is to provide a one-stop financial platform for controlling y
   * https://app.swaggerhub.com/apis-docs/tusharranjan719/FinanceX/1.0.0
 
 
+ **Sprint 2: videos**
+  * https://youtu.be/3wTg8Z39GMc
+
+
 ## Sprint 3: Tasks Completed 
 
 **Completed Homepage Layout**
@@ -107,13 +111,15 @@ The project's goal is to provide a one-stop financial platform for controlling y
 
 ## Sprint 4: Tasks Completed
 
- * **Cypress Testcases video**
+ **Cypress Testcases video**
  * https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
 
 
+Uploading Cypress test Video.mp4…
 
- **Sprint 2: videos**
-* https://youtu.be/3wTg8Z39GMc
+
+
+
 
 
 
