@@ -380,6 +380,32 @@ describe('get particular expenses by id', () => {
   });
 });
 
+describe('get balances by id', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  
+  it('gets balance by id', () => {
+      cy.wait(2000);
+      cy.request('GET', '/billsplit/1/balance').then((response) => {
+          expect(response.body['total_balance']).to.be.eq(200);
+      })
+  });
+});
+
+describe('get debt by id', () => {
+  beforeEach(() => {
+    cy.visit('/#/dashboard/dashboard');
+  });
+  
+  it('gets debt by id', () => {
+      cy.wait(2000);
+      cy.request('GET', '/billsplit/1/debt').then((response) => {
+          expect(response.body['total_debt']).to.be.eq(200);
+      })
+  });
+});
+
 
 
 
