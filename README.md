@@ -119,9 +119,7 @@ FinanceX is a service that simplifies bill splitting with friends and family. Th
 
 
 
-**Sprint 4: Videos**
-  * Deliverables : https://www.youtube.com/watch?v=QAt5Vaahg9Y
-  * Cypress Testcases video : https://user-images.githubusercontent.com/14293662/164103207-b5dea3b6-8fc0-484f-8735-59b99110a59e.mp4
+
 
 
 
