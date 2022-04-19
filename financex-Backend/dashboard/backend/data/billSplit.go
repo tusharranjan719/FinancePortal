@@ -173,6 +173,29 @@ func (billSplit *BillSplit) CreateParticipants(names []string) (err error) {
 	return
 }
 
+func (billSplit *BillSplit) CreateMultiParticipants(names []string) (err error) {
+
+	sqlStr := "insert into participant(uuid, name, billsplit_id, created_at) VALUES "
+	vals := []interface{}{}
+
+	for _, row := range names {
+		sqlStr += "(?, ?, ?, ?),"
+		vals = append(vals, createUUID(), row, billSplit.Id, time.Now())
+	}
+	//trim the last ,
+	sqlStr = strings.TrimSuffix(sqlStr, ",")
+
+	//Replacing ? with $n for postgres
+	sqlStr = ReplaceSQL(sqlStr, "?", 1)
+
+	//prepare the statement
+	stmt, _ := Db.Prepare(sqlStr)
+
+	//format all vals at once
+	_, err = stmt.Exec(vals...)
+	return
+}
+
 // CreateExpense : Adding new Expense to be splitted
 // name: name of the expense to create
 // amount: amount of the expense
