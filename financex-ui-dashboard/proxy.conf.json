@@ -28,5 +28,47 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": false
+    },
+    "/billsplit/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/new-bill/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/new-expense/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/newexpense/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/expense/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/balance/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
+    },
+    "/debt/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": false
     }
 }

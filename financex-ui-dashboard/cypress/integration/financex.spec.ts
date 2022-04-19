@@ -249,13 +249,40 @@ describe('sign In', () => {
 
 })
 
+describe('sign Up New User', () => {
+  it('sign Up', () => {
+    cy.wait(2000)
+    cy.intercept('POST', '/signUp', {
+      statusCode: 201
+    }).as('new-user')
+    cy.request('POST', '/signUp', {
+      name: 'Sankalp',
+      password: 'tdlr',
+    }).then((response: any) => {
+      cy.log(response)
+      console.log(response)
+      //expect(response.statusCode).to.eq(201)
+      expect(response.body['name']).to.be.eq('Sankalp');
+    })
+    cy.request('POST', '/new-user', {
+      name: 'Sankalp',
+      password: 'tdlr',
+    }).then((response: any) => {
+      cy.log(response)
+      console.log(response)
+    })
+    cy.get('@new-user').then(console.log)
+  })
+
+})
+
 
 describe('get all users info', () => {
   beforeEach(() => {
     cy.visit('/#/dashboard/dashboard');
   });
   it('get all user', () => {
-    cy.wait(10000)
+    cy.wait(2000)
     cy.request('GET', '/users').then((response) => {
       expect(response.body).to.be.a('array');
     })
@@ -287,6 +314,26 @@ describe('get user billing info by id', () => {
       })
   });
 });
+
+describe('new bill split group', () => {
+  it('new bill split group', () => {
+    cy.wait(2000)
+    cy.intercept('POST', '/billsplit/new', {
+      statusCode: 201
+    }).as('new-bill')
+    cy.request('POST', '/billsplit/new', {
+      name: 'billsplitgroup1',
+    }).then((response: any) => {
+      cy.log(response)
+      console.log(response)
+      //expect(response.statusCode).to.eq(201)
+      expect(response.body['name']).to.be.eq('billsplitgroup1');
+    })
+    cy.get('@new-bill').then(console.log)
+  })
+});
+
+
 
 
 
